@@ -7,21 +7,35 @@ const getIndex = () => {
   return ++index;
 };
 
-const toDos = [
-  {
-    name: "",
-    id: getIndex(),
-    completed: false,
-  },
-];
-
 const initialState = {
-  toDos,
+  toDos: [],
   toDoInput: "",
 };
 
 export default class App extends React.Component {
   state = initialState;
+
+  onChangeHandler = (key, value) => {
+    this.setState({
+      ...this.state,
+      [key]: value,
+    });
+  };
+
+  onSubmitHandler = () => {
+    this.setState({
+      ...this.state,
+      toDos: [
+        ...this.state.toDos,
+        {
+          name: this.state.toDoInput,
+          id: getIndex(),
+          completed: false,
+        },
+      ],
+      toDoInput: initialState.toDoInput,
+    });
+  };
 
   render() {
     const { toDos, toDoInput } = this.state;
@@ -29,7 +43,11 @@ export default class App extends React.Component {
     return (
       <>
         <TodoList toDos={toDos} />
-        <Form toDoInput={toDoInput} />
+        <Form
+          toDoInput={toDoInput}
+          onChangeHandler={this.onChangeHandler}
+          onSubmitHandler={this.onSubmitHandler}
+        />
       </>
     );
   }
