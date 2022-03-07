@@ -1,4 +1,6 @@
 import React from "react";
+import TodoList from "./TodoList";
+import Form from "./Form";
 
 let index = 0;
 const getIndex = () => {
@@ -22,6 +24,13 @@ export default class App extends React.Component {
   state = initialState;
 
   render() {
-    return <div>Todo App</div>;
+    const { toDos, toDoInput } = this.state;
+
+    return (
+      <>
+        <TodoList toDos={toDos} />
+        <Form toDoInput={toDoInput} />
+      </>
+    );
   }
 }
