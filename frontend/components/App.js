@@ -37,12 +37,21 @@ export default class App extends React.Component {
     });
   };
 
+  completedItemHandler = (id) => {
+    this.setState({
+      ...this.state,
+      toDos: this.state.toDos.map((todo) => {
+        return todo.id === id ? { ...todo, completed: !todo.completed } : todo;
+      }),
+    });
+  };
+
   render() {
     const { toDos, toDoInput } = this.state;
 
     return (
       <>
-        <TodoList toDos={toDos} />
+        <TodoList toDos={toDos} completedItemHandler={this.completedItemHandler} />
         <Form
           toDoInput={toDoInput}
           onChangeHandler={this.onChangeHandler}
