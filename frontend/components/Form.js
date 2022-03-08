@@ -11,8 +11,9 @@ export default class Form extends React.Component {
     this.props.onSubmitHandler();
   };
 
-  onHideCompleted = (evt) => {
+  onClearCompleted = (evt) => {
     evt.preventDefault();
+    this.props.onClearCompletedHandler();
   };
 
   render() {
@@ -30,9 +31,7 @@ export default class Form extends React.Component {
           />
           <button>Submit</button>
         </form>
-        <form onSubmit={this.onHideCompleted}>
-          <button>Hide Completed</button>
-        </form>
+        <button onClick={this.onClearCompleted}>Clear Completed</button>
       </>
     );
   }

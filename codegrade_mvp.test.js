@@ -4,7 +4,7 @@ import App from "./frontend/components/App";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-// jest.setTimeout(750) // default 5000 too long for Codegrade
+jest.setTimeout(750); // default 5000 too long for Codegrade
 
 beforeAll(() => {
   server.listen();

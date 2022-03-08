@@ -23,18 +23,19 @@ export default class App extends React.Component {
   };
 
   onSubmitHandler = () => {
-    this.setState({
-      ...this.state,
-      toDos: [
-        ...this.state.toDos,
-        {
-          name: this.state.toDoInput,
-          id: getIndex(),
-          completed: false,
-        },
-      ],
-      toDoInput: initialState.toDoInput,
-    });
+    this.state.toDoInput &&
+      this.setState({
+        ...this.state,
+        toDos: [
+          ...this.state.toDos,
+          {
+            name: this.state.toDoInput,
+            id: getIndex(),
+            completed: false,
+          },
+        ],
+        toDoInput: initialState.toDoInput,
+      });
   };
 
   completedItemHandler = (id) => {
@@ -42,6 +43,15 @@ export default class App extends React.Component {
       ...this.state,
       toDos: this.state.toDos.map((todo) => {
         return todo.id === id ? { ...todo, completed: !todo.completed } : todo;
+      }),
+    });
+  };
+
+  onClearCompletedHandler = () => {
+    this.setState({
+      ...this.state,
+      toDos: this.state.toDos.filter((todo) => {
+        return todo.completed === false;
       }),
     });
   };
@@ -56,6 +66,7 @@ export default class App extends React.Component {
           toDoInput={toDoInput}
           onChangeHandler={this.onChangeHandler}
           onSubmitHandler={this.onSubmitHandler}
+          onClearCompletedHandler={this.onClearCompletedHandler}
         />
       </>
     );
